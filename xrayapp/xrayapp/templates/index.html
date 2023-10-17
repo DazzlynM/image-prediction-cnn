@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'form.css' %}"/>
+  <title>Mercy Okonna</title>
+</head>
+{% block form %}
+<body>
+  <div style="display: flex; background-color: aquamarine; margin: '50px'; height: 10vh; align-items: center; justify-content: center; align-content: center;">
+    <div>
+      <h2 style="font-size: large; font-weight: 700; justify-content: center; align-items: center; align-content: center;">Mercy Okonna</h2>
+    </div>
+  </div>
+
+  <div class="formcarryContainer">
+
+    <form action="." class="formcarryForm" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{form.as_p}}
+      <!-- <label for="nameInput">Name</label>
+      <input type="text" id="nameInput" name="name" />
+
+      <label for="messageInput">Message</label>
+      <textarea id="messageInput" name="message" cols="10" rows="2"></textarea>
+
+      <label for="pictureInput">Picture</label>
+      <input type="file" id="pictureInput" name="picture" />
+
+      <button type="submit">Submit</button>
+    </form> -->
+    {% if not obj %}
+    <button type="submit">Submit</button>
+    {% endif %}
+
+    {% if obj %}
+    <h3>Successfully uploaded : {{obj.name}}</h3>
+    <h2 id='textResult' style="font-size: large; font-weight: 700;">Test Result: {{ testResult }}</h2>
+    <img src="{{obj.image.url}}" alt="image" class="img-thumbnail" height="80%" width="80%">
+    <button onclick="window.history.go(-1); return false;" style="width: 50%;">Back to form</button>
+    {% endif %}
+  </div>
+</body>
+{% endblock%}
+
+</html>
